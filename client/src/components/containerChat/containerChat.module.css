@@ -1,0 +1,48 @@
+.rightContainer {
+    width: 69vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.header_button {
+    height: 40px;
+    border: solid 1px green;
+    border-radius: 62px;
+    padding: 12px;
+}
+
+.header_button:hover {
+    background-color: rgb(153, 88, 8);
+}
+
+.container {
+    height: 80vh;
+    background-color: #fff;
+    padding: 0 20px 20px 20px;
+    overflow-y: scroll;
+}
+
+.container>* {
+    margin-bottom: 10px;
+}
+
+.chatConteinerUnput {
+    height: 50px;
+    font-size: 20px;
+    border-radius: 16px 0px 0px 16px;
+    outline: none;
+}
+
+
+.chatConteinerButton {
+    border-radius: 0 16px 16px 0px;
+    width: 250px;
+    cursor: pointer;
+    font-size: 14px;
+    border-left: none;
+}
+
+.chatConteinerButton:hover {
+    background-color: rgb(194, 243, 194);
+}

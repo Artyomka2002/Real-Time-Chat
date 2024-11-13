@@ -1,0 +1,29 @@
+.tabs {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .tabTitles {
+    display: flex;
+  }
+  
+  .tabTitle {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .tabTitle.active {
+    background-color: white;
+    border-bottom: 2px solid blue; /* Чтобы выделить активную вкладку */
+  }
+  
+  .tabContent {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px; /* Скругление углов */
+  }
+  

@@ -1,0 +1,22 @@
+.containerForm {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.unputs {
+    border: none;
+    border-bottom: solid 1px #7c7c7c;
+    outline: none;
+    height: 60px;
+    font-size: 24px;
+}
+
+.InputsBox {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}

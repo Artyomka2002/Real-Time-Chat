@@ -11,10 +11,8 @@ export interface Message {
 }
 
 export interface ChatPropsType {
-  userName?: string;
   descriptionInterlocutor?: string;
   userSocketID?: string;
-  users?: User[];
 }
 
 export interface UserType {

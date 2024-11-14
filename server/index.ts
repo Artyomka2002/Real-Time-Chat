@@ -37,6 +37,12 @@ app.get("/api", (req: Request, res: Response) => {
 const activeChats: { [key: string]: MessagesChat } = {};
 
 socketIO.on("connection", (socket) => {
+  socket.on(NEW_USER, (data) => {
+    users.push(data);
+    socketIO.emit(GET_USERS, users);
+  });
+
+  // Receiving a message from a client and creating a chat based on these messages
   socket.on(MESSAGE, (data) => {
     const chatId = data.socketID;
 
@@ -64,11 +70,7 @@ socketIO.on("connection", (socket) => {
     socketIO.emit(`response_${chatId}`, chat.text);
   });
 
-  socket.on(NEW_USER, (data) => {
-    users.push(data);
-    socketIO.emit(GET_USERS, users);
-  });
-
+  // Getting a chat instance from a client between two users
   socket.on(UniquenessofTheChat, (data) => {
     const identifier: string = data;
     socketIO.emit(ID_CHAT, identifier);
@@ -77,7 +79,7 @@ socketIO.on("connection", (socket) => {
   socket.on(GET_USERS, () => {
     socketIO.emit(GET_USERS, users);
   });
-
+  // Removing the current user from the list
   socket.on("disconnect_user", (userId) => {
     const result = users.filter((user) => user.name !== userId);
     users = result;

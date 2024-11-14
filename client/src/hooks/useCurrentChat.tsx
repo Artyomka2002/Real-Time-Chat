@@ -4,11 +4,8 @@ import { useState } from "react";
 import { User } from "../types";
 import { UniquenessofTheChat } from "../../../const";
 
-export default function useCurrentChat({
-  setModal,
-}: {
-  setModal?: (value: boolean) => void;
-}) {
+// The hook renders the chat for 2 users
+export default function useCurrentChat() {
   const [currentChat, setCurrentChat] = useState<{
     user1: string;
     user2: string;
@@ -16,15 +13,13 @@ export default function useCurrentChat({
   const { activeChats, setActiveChats } = useActiveChat();
 
   const openChatWithUser = (user: User) => {
+    
     const currentUser = localStorage.getItem("user");
-
-    if (!currentUser) {
-      return;
-    }
+    if (!currentUser) return;
 
     const chatIdentifier = { user1: currentUser, user2: user.name };
 
-    socket.emit( UniquenessofTheChat , {
+    socket.emit(UniquenessofTheChat, {
       user1: chatIdentifier.user1,
       user2: chatIdentifier.user2,
       idChat: `${user.name}-${user.socketID}`,
@@ -43,8 +38,6 @@ export default function useCurrentChat({
       setActiveChats((prev) => [...prev, chatIdentifier]);
     }
     setCurrentChat(chatIdentifier);
-
-    if (setModal) setModal(false);
   };
   return { currentChat, openChatWithUser, setCurrentChat };
 }

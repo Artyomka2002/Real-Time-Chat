@@ -12,7 +12,18 @@ export interface Message {
 
 export interface ChatPropsType {
   userName?: string;
-  chatsPeopleName?: string;
+  descriptionInterlocutor?: string;
   userSocketID?: string;
   users?: User[];
+}
+
+export interface UserType {
+  id: string;
+  name: string;
+}
+
+export interface MessagesChat {
+  name: string;
+  socketID: string;
+  text: Array<object>;
 }

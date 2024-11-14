@@ -7,15 +7,15 @@ import useUsers from "../hooks/useUsers";
 import useActiveChat from "./../hooks/useActiveChat";
 import useCurrentChat from "./../hooks/useCurrentChat";
 import { socket } from "../socketClient";
+import { CHAT_WITH_A_FRIEND } from "../../../const";
+import { GENERAL_CHAT } from "../../../const";
 
 const Layout = () => {
   const navigate = useNavigate();
   const users = useUsers();
   const { activeChats } = useActiveChat();
   const [modal, setModal] = useState<boolean>(false);
-  const { currentChat, openChatWithUser, setCurrentChat } = useCurrentChat({
-    setModal,
-  });
+  const { currentChat, openChatWithUser, setCurrentChat } = useCurrentChat();
   const clientUser = localStorage.getItem("user");
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,7 +30,6 @@ const Layout = () => {
     setCurrentChat(chat);
     setModal(false);
   };
-
   return (
     <>
       <header className={cl.header}>
@@ -67,27 +66,26 @@ const Layout = () => {
             </div>
           ))}
         </div>
-
         {currentChat && (
           <Chat
-            key={`${currentChat.user1}-${currentChat.user2}`} //  template literals
-            userName={currentChat.user1}
             userSocketID={currentChat.user2}
-            users={users}
-            chatsPeopleName={"Чат с другом"}
+            descriptionInterlocutor={CHAT_WITH_A_FRIEND}
           />
         )}
-        <Chat chatsPeopleName={"Общий чат"} />
+        <Chat descriptionInterlocutor={GENERAL_CHAT} />
       </div>
 
       <Modal isOpen={modal} onClose={() => setModal(false)}>
-        <div>Выберите пользователя и начните общаться!</div>
+        <span>Выберите пользователя и начните общаться!</span>
         {users.map((user) => (
           <div
             className={cl.userNameInModal}
             style={{ padding: "10px", cursor: "pointer" }}
             key={user.socketID}
-            onClick={() => openChatWithUser(user)}
+            onClick={() => {
+              openChatWithUser(user);
+              setModal(false);
+            }}
           >
             {user.name}
           </div>

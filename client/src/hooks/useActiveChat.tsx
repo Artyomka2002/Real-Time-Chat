@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { socket } from "../socketClient";
 import { ID_CHAT } from "../../../const";
 
+// The request returns an active chat. The chat is described as 2 interlocutors and a chat ID
 export default function useActiveChat() {
   const [activeChats, setActiveChats] = useState<
     Array<{ user1: string; user2: string }>

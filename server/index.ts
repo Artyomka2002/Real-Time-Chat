@@ -1,21 +1,13 @@
-import express, { Request, Response } from "express";
 import http from "http";
+import express, { Request, Response } from "express";
 import { Server as SocketIOServer } from "socket.io";
+import { MessagesChat } from "../client/src/types";
+import { UserType } from "../client/src/types";
 import { GET_USERS } from "../const";
 import { MESSAGE } from "../const";
 import { UniquenessofTheChat } from "../const";
 import { ID_CHAT } from "../const";
 import { NEW_USER } from "../const";
-interface UserType {
-  id: string;
-  name: string;
-}
-
-interface MessagesChat {
-  name: string;
-  socketID: string;
-  text: Array<object>;
-}
 
 const app = express();
 const PORT = 5000;

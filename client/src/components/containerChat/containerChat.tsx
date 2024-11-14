@@ -7,7 +7,10 @@ import { Message } from "../../types";
 import { ChatPropsType } from "../../types";
 import ListMessages from "./componentsContainerChat/ListMessages";
 
-const Chat: React.FC<ChatPropsType> = ({ userSocketID, chatsPeopleName }) => {
+const Chat: React.FC<ChatPropsType> = ({
+  userSocketID,
+  descriptionInterlocutor,
+}) => {
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [message, setMessage] = useState<string>("");
   const currentUser: string | null = localStorage.getItem("user");
@@ -37,7 +40,7 @@ const Chat: React.FC<ChatPropsType> = ({ userSocketID, chatsPeopleName }) => {
   return (
     <div className={cl.rightContainer}>
       <div style={{ textAlign: "center", padding: "18px 0 0 0" }}>
-        {chatsPeopleName}
+        {descriptionInterlocutor}
       </div>
       <div className={cl.container}>
         <ListMessages messages={messages} currentUser={currentUser} />

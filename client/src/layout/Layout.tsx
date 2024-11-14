@@ -68,7 +68,7 @@ const Layout = () => {
         </div>
         {currentChat && (
           <Chat
-            userSocketID={currentChat.user2}
+            userSocketID={currentChat.user2} //We pass the name with which the chat was created as the socket ID
             descriptionInterlocutor={CHAT_WITH_A_FRIEND}
           />
         )}

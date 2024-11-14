@@ -3,6 +3,7 @@ import { User } from "../types";
 import { socket } from "../socketClient";
 import { GET_USERS } from "./../../../const";
 
+// Returns the user list on the server
 export default function useUsers() {
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {

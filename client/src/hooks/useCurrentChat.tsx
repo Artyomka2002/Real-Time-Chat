@@ -4,7 +4,7 @@ import { useState } from "react";
 import { User } from "../types";
 import { UniquenessofTheChat } from "../../../const";
 
-// The hook renders the chat for 2 users
+// Returns the users of the current chat
 export default function useCurrentChat() {
   const [currentChat, setCurrentChat] = useState<{
     user1: string;
@@ -13,7 +13,6 @@ export default function useCurrentChat() {
   const { activeChats, setActiveChats } = useActiveChat();
 
   const openChatWithUser = (user: User) => {
-    
     const currentUser = localStorage.getItem("user");
     if (!currentUser) return;
 

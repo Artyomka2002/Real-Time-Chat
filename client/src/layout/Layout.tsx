@@ -70,7 +70,7 @@ const Layout = () => {
 
         {currentChat && (
           <Chat
-            key={`${currentChat.user1}-${currentChat.user2}`} // Правильное использование шаблонных литералов
+            key={`${currentChat.user1}-${currentChat.user2}`} //  template literals
             userName={currentChat.user1}
             userSocketID={currentChat.user2}
             users={users}

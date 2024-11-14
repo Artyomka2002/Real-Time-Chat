@@ -14,9 +14,7 @@ const ListMessages = ({
         <p style={{ textAlign: "center", marginTop: "50vh" }}>
           Отправьте сообщение и продолжите диалог!
         </p>
-      ) : (
-        ""
-      )}
+      ) : null}
       {messages.map((element, index) => (
         <div key={element.id || index} className={cl.chats}>
           {element.name === currentUser ? (

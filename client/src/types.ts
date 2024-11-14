@@ -1,6 +1,7 @@
+
 export interface User {
   name: string;
-  socketID: string;
+  socketID?: string;
 }
 
 export interface Message {
@@ -25,3 +26,10 @@ export interface MessagesChat {
   socketID: string;
   text: Array<object>;
 }
+export interface DescriptionActiveСhat {
+  user1: string;
+  user2: string;
+  idChat?: string;
+}
+
+

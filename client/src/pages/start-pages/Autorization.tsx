@@ -3,16 +3,15 @@ import Input from "../../components/input/input";
 import cl from "./Autorization.module.css";
 import { useState } from "react";
 import { socket } from "../../socketClient";
-import { NEW_USER } from "../../../../const";
+import { AutorizationSoket } from "../../socketClient";
 const Autorization = () => {
-  console.log(socket);
   const navigate = useNavigate();
   const [user, setUser] = useState<string>("");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     localStorage.setItem("user", user);
     navigate("/chats");
-    socket.emit(NEW_USER, { name: user, socketID: socket.id });
+    AutorizationSoket.emit({ name: user, socketID: socket.id });
   };
   return (
     <>
@@ -31,17 +30,9 @@ const Autorization = () => {
               id={"startIdTel"}
               className={cl.unputs}
               error="Не нужно вводить , если хотите войти как гость"
+              // Create an administration functionality
             />
-            <button
-              style={{
-                height: "144px",
-                borderRadius: "25px",
-                backgroundColor: "#3535ff",
-                color: "#fff",
-              }}
-            >
-              Войти
-            </button>
+            <button className={cl.buttonAutorization}>Войти</button>
           </div>
         </div>
       </form>

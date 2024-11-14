@@ -26,12 +26,8 @@ const Input: React.FC<Props> = ({
   const classes = classNames(cl.input, className);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (setUsers) {
-      setUsers(e.target.value);
-    }
-    if (onChange) {
-      onChange(e);
-    }
+    if (setUsers) setUsers(e.target.value);
+    if (onChange) onChange(e);
   };
 
   return (

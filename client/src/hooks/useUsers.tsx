@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import { User } from "../types";
-import { socket } from "../socketClient";
-import { GET_USERS } from "./../../../const";
+import { GET_USERS } from "../../../const";
+import { userSocket } from "../socketClient";
 
 // Returns the user list on the server
 export default function useUsers() {
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
-    socket.emit(GET_USERS);
-    const handleGetUsers = (data: User[]) => {
-      setUsers(data);
-    };
-    socket.on(GET_USERS, handleGetUsers);
+    userSocket.emit(GET_USERS);
+    const handleGetUsers = (data: User[]) => setUsers(data);
+    userSocket.on(handleGetUsers);
     return () => {
-      socket.off(GET_USERS, handleGetUsers);
+      userSocket.off(handleGetUsers);
     };
   }, []);
   return users;

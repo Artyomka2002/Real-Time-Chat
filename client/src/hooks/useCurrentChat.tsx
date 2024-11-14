@@ -1,24 +1,20 @@
 import useActiveChat from "./useActiveChat";
-import { socket } from "../socketClient";
 import { useState } from "react";
 import { User } from "../types";
-import { UniquenessofTheChat } from "../../../const";
-
+import { DescriptionActiveСhat } from "../types";
+import { currentUser } from "../socketClient";
+import { currentChatSocket } from "../socketClient";
 // Returns the users of the current chat
 export default function useCurrentChat() {
-  const [currentChat, setCurrentChat] = useState<{
-    user1: string;
-    user2: string;
-  } | null>(null);
+  const [currentChat, setCurrentChat] = useState<DescriptionActiveСhat | null>(null);
   const { activeChats, setActiveChats } = useActiveChat();
 
   const openChatWithUser = (user: User) => {
-    const currentUser = localStorage.getItem("user");
     if (!currentUser) return;
 
     const chatIdentifier = { user1: currentUser, user2: user.name };
 
-    socket.emit(UniquenessofTheChat, {
+    currentChatSocket.emit({
       user1: chatIdentifier.user1,
       user2: chatIdentifier.user2,
       idChat: `${user.name}-${user.socketID}`,
@@ -33,9 +29,7 @@ export default function useCurrentChat() {
           chat.user2 === chatIdentifier.user1)
     );
 
-    if (!chatExists) {
-      setActiveChats((prev) => [...prev, chatIdentifier]);
-    }
+    if (!chatExists) setActiveChats((prev) => [...prev, chatIdentifier]);
     setCurrentChat(chatIdentifier);
   };
   return { currentChat, openChatWithUser, setCurrentChat };

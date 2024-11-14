@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
-import { socket } from "../socketClient";
-import { ID_CHAT } from "../../../const";
+import { DescriptionActiveСhat } from "../types";
+import { ActiveChatSocket } from "../socketClient";
+import { currentUser } from "../socketClient";
 
 // The request returns an active chat. The chat is described as 2 interlocutors and a chat ID
 export default function useActiveChat() {
-  const [activeChats, setActiveChats] = useState<
-    Array<{ user1: string; user2: string }>
-  >([]);
+  const [activeChats, setActiveChats] = useState<Array<DescriptionActiveСhat>>([]);
   useEffect(() => {
-    const handleNewChatId = (data: {
-      user1: string;
-      user2: string;
-      idChat: string;
-    }) => {
-      const currentUser = localStorage.getItem("user");
+    const handleNewChatId = (data: DescriptionActiveСhat) => {
 
       // user2 - the received user
       if (data.user2 === currentUser) {
@@ -26,16 +20,14 @@ export default function useActiveChat() {
             (chat.user1 === newChat.user2 && chat.user2 === newChat.user1)
         );
 
-        if (!chatExists) {
-          setActiveChats((prev) => [...prev, newChat]);
-        }
+        if (!chatExists) setActiveChats((prev) => [...prev, newChat]);
       }
     };
 
-    socket.on(ID_CHAT, handleNewChatId);
+    ActiveChatSocket.on(handleNewChatId);
 
     return () => {
-      socket.off(ID_CHAT, handleNewChatId);
+      ActiveChatSocket.off(handleNewChatId);
     };
   }, [activeChats]);
   return { activeChats, setActiveChats };

@@ -20,3 +20,10 @@
     flex-direction: column;
     gap: 80px;
 }
+
+.buttonAutorization {
+    height: 144px;
+    border-radius: 25px;
+    background-color: #3535ff;
+    color: #fff;
+}

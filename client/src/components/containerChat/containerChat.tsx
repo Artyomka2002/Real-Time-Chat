@@ -6,14 +6,15 @@ import { socket } from "../../socketClient";
 import { Message } from "../../types";
 import { ChatPropsType } from "../../types";
 import ListMessages from "./componentsContainerChat/ListMessages";
-
+import { currentUser } from "../../socketClient";
+import { chatSocket } from "../../socketClient";
 const Chat: React.FC<ChatPropsType> = ({
   userSocketID,
   descriptionInterlocutor,
 }) => {
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [message, setMessage] = useState<string>("");
-  const currentUser: string | null = localStorage.getItem("user");
+
   const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (message.trim() && currentUser) {
@@ -23,7 +24,7 @@ const Chat: React.FC<ChatPropsType> = ({
         id: `${socket.id}-${Math.random()}`,
         socketID: `${userSocketID}`,
       };
-      socket.emit("message", msgData);
+      chatSocket.emit(msgData);
       setMessage("");
     }
   };

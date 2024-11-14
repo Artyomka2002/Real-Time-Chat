@@ -1,13 +1,13 @@
-import http from "http";
 import express, { Request, Response } from "express";
+import http from "http";
 import { Server as SocketIOServer } from "socket.io";
-import { MessagesChat } from "../client/src/types";
-import { UserType } from "../client/src/types";
-import { GET_USERS } from "../const";
+import { DISCONNECT, GET_USERS } from "../const";
 import { MESSAGE } from "../const";
 import { UniquenessofTheChat } from "../const";
 import { ID_CHAT } from "../const";
 import { NEW_USER } from "../const";
+import { MessagesChat } from "../client/src/types";
+import { UserType } from "../client/src/types";
 
 const app = express();
 const PORT = 5000;
@@ -72,7 +72,7 @@ socketIO.on("connection", (socket) => {
     socketIO.emit(GET_USERS, users);
   });
   // Removing the current user from the list
-  socket.on("disconnect_user", (userId) => {
+  socket.on(DISCONNECT, (userId) => {
     const result = users.filter((user) => user.name !== userId);
     users = result;
     socketIO.emit(GET_USERS, users);

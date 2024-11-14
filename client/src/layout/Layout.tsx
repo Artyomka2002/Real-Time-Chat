@@ -6,9 +6,11 @@ import Modal from "../components/modal/modal";
 import useUsers from "../hooks/useUsers";
 import useActiveChat from "./../hooks/useActiveChat";
 import useCurrentChat from "./../hooks/useCurrentChat";
-import { socket } from "../socketClient";
 import { CHAT_WITH_A_FRIEND } from "../../../const";
 import { GENERAL_CHAT } from "../../../const";
+import { layoutSocket } from "../socketClient";
+import { DescriptionActiveСhat } from "../types";
+import { currentUser } from "../socketClient";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -16,17 +18,16 @@ const Layout = () => {
   const { activeChats } = useActiveChat();
   const [modal, setModal] = useState<boolean>(false);
   const { currentChat, openChatWithUser, setCurrentChat } = useCurrentChat();
-  const clientUser = localStorage.getItem("user");
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     localStorage.removeItem("user");
-    socket.emit("disconnect_user", clientUser);
+    layoutSocket.emit(currentUser);
     navigate("/");
   };
 
   // Rendering a custom chat
-  const handleChatClick = (chat: { user1: string; user2: string }) => {
+  const handleChatClick = (chat: DescriptionActiveСhat) => {
     setCurrentChat(chat);
     setModal(false);
   };
@@ -34,7 +35,7 @@ const Layout = () => {
     <>
       <header className={cl.header}>
         <div className={cl.headerContainer}>
-          <span>Ваше имя : {clientUser}</span>
+          <span>Ваше имя : {currentUser}</span>
           <div
             className={cl.ChoosingAnInterlocutor}
             onClick={() => setModal(true)}

@@ -1,6 +1,6 @@
 import cl from "./containerChat.module.css";
 import React from "react";
-import Input from "../input/input";
+import Input from "../../UI/input/input";
 import { useState, useEffect } from "react";
 import { socket } from "../../socketClient";
 import { Message } from "../../types";

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import cl from "./Layout.module.css";
 import { useState } from "react";
 import Chat from "../components/containerChat/containerChat";
-import Modal from "../components/modal/modal";
+import Modal from "../UI/modal/modal";
 import useUsers from "../hooks/useUsers";
 import useActiveChat from "./../hooks/useActiveChat";
 import useCurrentChat from "./../hooks/useCurrentChat";
@@ -10,6 +10,7 @@ import { CHAT_WITH_A_FRIEND } from "../../../const";
 import { GENERAL_CHAT } from "../../../const";
 import { layoutSocket } from "../socketClient";
 import { DescriptionActiveСhat } from "../types";
+import ListUsers from "../components/ListUsers/ListUsers";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -40,10 +41,7 @@ const Layout = () => {
             onClick={() => setModal(true)}
           >
             <span>
-              В сети {users.length}{" "}
-              {users.length === 1 || users.length > 5 || users.length === 0
-                ? "человек"
-                : "человека"}
+              В сети {users.length}{" "}{users.length === 1 || users.length > 5 || users.length === 0 ? "человек" : "человека"}
             </span>
             <span style={{ fontSize: "12px" }}>
               Нажмите и выберите собеседника среди пользователей!
@@ -54,7 +52,7 @@ const Layout = () => {
           </button>
         </div>
       </header>
-      <div className={cl.main}>
+      <main className={cl.main}>
         <div className={cl.leftContainer}>
           {activeChats.map((chat, index) => (
             <div
@@ -70,26 +68,23 @@ const Layout = () => {
           <Chat
             userSocketID={currentChat.user2} //We pass the name with which the chat was created as the socket ID
             descriptionInterlocutor={CHAT_WITH_A_FRIEND}
+            key={`${currentChat.user1}-${currentChat.user2}`}
           />
         )}
         <Chat descriptionInterlocutor={GENERAL_CHAT} />
-      </div>
+      </main>
 
       <Modal isOpen={modal} onClose={() => setModal(false)}>
         <span>Выберите пользователя и начните общаться!</span>
-        {users.map((user) => (
-          <div
-            className={cl.userNameInModal}
-            style={{ padding: "10px", cursor: "pointer" }}
-            key={user.socketID}
-            onClick={() => {
-              openChatWithUser(user);
-              setModal(false);
-            }}
-          >
-            {user.name}
-          </div>
-        ))}
+        {users.map((user) => {
+          return user.name !== currentUser ? (
+            <ListUsers
+              user={user}
+              openChatWithUser={openChatWithUser}
+              setModal={setModal}
+            />
+          ) : null;
+        })}
       </Modal>
     </>
   );

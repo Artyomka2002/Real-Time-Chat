@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Input from "../../components/input/input";
+import Input from "../../UI/input/input";
 import cl from "./Autorization.module.css";
 import { useState } from "react";
 import { socket } from "../../socketClient";

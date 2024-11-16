@@ -2,12 +2,13 @@ import useActiveChat from "./useActiveChat";
 import { useState } from "react";
 import { User } from "../types";
 import { DescriptionActiveСhat } from "../types";
-import { currentUser } from "../socketClient";
+
 import { currentChatSocket } from "../socketClient";
 // Returns the users of the current chat
 export default function useCurrentChat() {
   const [currentChat, setCurrentChat] = useState<DescriptionActiveСhat | null>(null);
   const { activeChats, setActiveChats } = useActiveChat();
+  const currentUser = localStorage.getItem("user");
 
   const openChatWithUser = (user: User) => {
     if (!currentUser) return;

@@ -7,6 +7,8 @@ import { DescriptionActiveСhat, User } from "./types";
 import { MESSAGE } from "./../../const";
 import { DISCONNECT } from "./../../const";
 
+// export const currentUser = () => localStorage.getItem("user");
+
 export const userSocket = {
   emit: (event: string) => socket.emit(event),
   on: (callback: (data: User[]) => void) => socket.on(GET_USERS, callback),
@@ -33,5 +35,3 @@ export const layoutSocket = {
 export const AutorizationSoket = {
   emit: (callback: User) => socket.emit(NEW_USER, callback),
 };
-
-export const currentUser = localStorage.getItem("user");

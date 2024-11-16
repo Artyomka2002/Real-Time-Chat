@@ -27,7 +27,7 @@ export interface MessagesChat {
   text: Array<object>;
 }
 export interface DescriptionActiveСhat {
-  user1: string;
+  user1: string | null;
   user2: string;
   idChat?: string;
 }

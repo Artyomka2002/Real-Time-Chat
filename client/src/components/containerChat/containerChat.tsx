@@ -6,7 +6,7 @@ import { socket } from "../../socketClient";
 import { Message } from "../../types";
 import { ChatPropsType } from "../../types";
 import ListMessages from "./componentsContainerChat/ListMessages";
-import { currentUser } from "../../socketClient";
+
 import { chatSocket } from "../../socketClient";
 const Chat: React.FC<ChatPropsType> = ({
   userSocketID,
@@ -14,6 +14,7 @@ const Chat: React.FC<ChatPropsType> = ({
 }) => {
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [message, setMessage] = useState<string>("");
+  const currentUser = localStorage.getItem("user");
 
   const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { DescriptionActiveСhat } from "../types";
 import { ActiveChatSocket } from "../socketClient";
-import { currentUser } from "../socketClient";
+
 
 // The request returns an active chat. The chat is described as 2 interlocutors and a chat ID
 export default function useActiveChat() {
   const [activeChats, setActiveChats] = useState<Array<DescriptionActiveСhat>>([]);
+  const currentUser = localStorage.getItem("user");
+
   useEffect(() => {
     const handleNewChatId = (data: DescriptionActiveСhat) => {
 

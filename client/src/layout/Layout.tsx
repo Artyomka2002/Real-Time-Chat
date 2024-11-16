@@ -10,7 +10,6 @@ import { CHAT_WITH_A_FRIEND } from "../../../const";
 import { GENERAL_CHAT } from "../../../const";
 import { layoutSocket } from "../socketClient";
 import { DescriptionActiveСhat } from "../types";
-import { currentUser } from "../socketClient";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ const Layout = () => {
   const { activeChats } = useActiveChat();
   const [modal, setModal] = useState<boolean>(false);
   const { currentChat, openChatWithUser, setCurrentChat } = useCurrentChat();
-
+  const currentUser = localStorage.getItem("user");
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     localStorage.removeItem("user");

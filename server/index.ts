@@ -73,6 +73,8 @@ socketIO.on("connection", (socket) => {
   });
   // Removing the current user from the list
   socket.on(DISCONNECT, (userId) => {
+    console.log('пришло что то')
+    console.log(userId)
     const result = users.filter((user) => user.name !== userId);
     users = result;
     socketIO.emit(GET_USERS, users);

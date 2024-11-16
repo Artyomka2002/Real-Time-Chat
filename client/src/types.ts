@@ -1,4 +1,3 @@
-
 export interface User {
   name: string;
   socketID?: string;
@@ -8,12 +7,13 @@ export interface Message {
   id: number | string;
   name: string;
   messageName: string;
-  socketID: string;
+  socketID: string ;
 }
 
 export interface ChatPropsType {
   descriptionInterlocutor?: string;
   userSocketID?: string;
+  setRenderChat?: (arg: boolean) => void;
 }
 
 export interface UserType {
@@ -31,5 +31,3 @@ export interface DescriptionActiveСhat {
   user2: string;
   idChat?: string;
 }
-
-

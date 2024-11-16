@@ -13,12 +13,14 @@ import { DescriptionActiveСhat } from "../types";
 import ListUsers from "../components/ListUsers/ListUsers";
 
 const Layout = () => {
+  const [modal, setModal] = useState<boolean>(false);
+  const [renderChat, setRenderChat] = useState<boolean>(false);
+  const { activeChats } = useActiveChat();
+  const { currentChat, openChatWithUser, setCurrentChat } = useCurrentChat();
   const navigate = useNavigate();
   const users = useUsers();
-  const { activeChats } = useActiveChat();
-  const [modal, setModal] = useState<boolean>(false);
-  const { currentChat, openChatWithUser, setCurrentChat } = useCurrentChat();
   const currentUser = localStorage.getItem("user");
+
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     localStorage.removeItem("user");
@@ -30,43 +32,45 @@ const Layout = () => {
   const handleChatClick = (chat: DescriptionActiveСhat) => {
     setCurrentChat(chat);
     setModal(false);
+    setRenderChat(true);
   };
   return (
     <>
       <header className={cl.header}>
         <div className={cl.headerContainer}>
           <span>Ваше имя : {currentUser}</span>
-          <div
-            className={cl.ChoosingAnInterlocutor}
-            onClick={() => setModal(true)}
-          >
-            <span>
-              В сети {users.length}{" "}{users.length === 1 || users.length > 5 || users.length === 0 ? "человек" : "человека"}
-            </span>
-            <span style={{ fontSize: "12px" }}>
-              Нажмите и выберите собеседника среди пользователей!
-            </span>
+
+          <div className={cl.ChoosingAnInterlocutor} onClick={() => setModal(true)}>
+
+            <span> В сети {users.length}{" "}{users.length === 1 || users.length > 5 || users.length === 0 ? "человек" : "человека"}</span>
+
+            <span style={{ fontSize: "12px" }}> Нажмите и выберите собеседника среди пользователей!</span>
+
           </div>
+
           <button onClick={handleSubmit} className={cl.header_button}>
             Выйти из чата
           </button>
         </div>
       </header>
+
       <main className={cl.main}>
-        <div className={cl.leftContainer}>
+        <div className={cl.leftContainerSidebar}>
           {activeChats.map((chat, index) => (
             <div
               key={index}
               className={cl.chatSlide}
               onClick={() => handleChatClick(chat)}
             >
-              {chat.user1} и {chat.user2}
+              {chat.user1}
             </div>
           ))}
         </div>
-        {currentChat && (
+        {/* If both conditions are true, the Chat component is rendered */}
+        {renderChat && currentChat && (
           <Chat
-            userSocketID={currentChat.user2} //We pass the name with which the chat was created as the socket ID
+            setRenderChat={setRenderChat}
+            userSocketID={currentChat.user2}
             descriptionInterlocutor={CHAT_WITH_A_FRIEND}
             key={`${currentChat.user1}-${currentChat.user2}`}
           />
@@ -82,6 +86,7 @@ const Layout = () => {
               user={user}
               openChatWithUser={openChatWithUser}
               setModal={setModal}
+              setRenderChat={setRenderChat}
             />
           ) : null;
         })}

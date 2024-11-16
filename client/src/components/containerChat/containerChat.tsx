@@ -11,6 +11,7 @@ import { chatSocket } from "../../socketClient";
 const Chat: React.FC<ChatPropsType> = ({
   userSocketID,
   descriptionInterlocutor,
+  setRenderChat,
 }) => {
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [message, setMessage] = useState<string>("");
@@ -41,12 +42,20 @@ const Chat: React.FC<ChatPropsType> = ({
 
   return (
     <div className={cl.rightContainer}>
-      <div style={{ textAlign: "center", padding: "18px 0 0 0" }}>
-        {descriptionInterlocutor}
+      
+      <div className={cl.descriptionContainer}>
+        <span>
+          {descriptionInterlocutor}
+          <span
+          className={cl.closeChange}
+          onClick={() => setRenderChat?.(false)}>{setRenderChat ? "𐄂" : ''}</span>  {/* a crutch within the framework of the project */}
+        </span>
       </div>
+
       <div className={cl.container}>
         <ListMessages messages={messages} currentUser={currentUser} />
       </div>
+      
       <div style={{ padding: "30px" }}>
         <form onSubmit={handleSend} style={{ display: "flex" }}>
           <Input

@@ -5,9 +5,15 @@ type ListProp = {
   user: User;
   openChatWithUser: (str: User) => void;
   setModal: (arg: boolean) => void;
+  setRenderChat: (bool: boolean) => void;
 };
 
-const ListUsers = ({ user, openChatWithUser, setModal }: ListProp) => {
+const ListUsers = ({
+  user,
+  openChatWithUser,
+  setModal,
+  setRenderChat,
+}: ListProp) => {
   return (
     <>
       <div
@@ -17,6 +23,7 @@ const ListUsers = ({ user, openChatWithUser, setModal }: ListProp) => {
         onClick={() => {
           openChatWithUser(user);
           setModal(false);
+          setRenderChat(true);
         }}
       >
         {user.name}

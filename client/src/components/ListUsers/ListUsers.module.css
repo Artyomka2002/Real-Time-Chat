@@ -1,0 +1,11 @@
+.userNameInModal:hover {
+    border: solid 2px
+}
+
+.userNameInModal {
+    margin-top: 18px;
+}
+
+.userNameInModal:last-child {
+    margin-bottom: 18px;
+}

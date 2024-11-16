@@ -31,6 +31,6 @@ export default function useActiveChat() {
     return () => {
       ActiveChatSocket.off(handleNewChatId);
     };
-  }, [activeChats]);
+  }, [activeChats, currentUser]);
   return { activeChats, setActiveChats };
 }

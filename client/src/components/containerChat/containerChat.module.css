@@ -46,3 +46,18 @@
 .chatConteinerButton:hover {
     background-color: rgb(194, 243, 194);
 }
+
+.closeChange {
+    position: absolute;
+    top: -10px;
+    right: 46px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.descriptionContainer {
+    position: relative;
+    text-align: center;
+    padding: 18px 0 0 0;
+    align-items: baseline;
+}

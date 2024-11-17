@@ -8,6 +8,7 @@ const Autorization = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<string>("");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if(!user) return alert('Введите свое имя!')
     e.preventDefault();
     localStorage.setItem("user", user);
     navigate("/chats");
@@ -23,13 +24,13 @@ const Autorization = () => {
               id={"startIdNames"}
               className={cl.unputs}
               value={user}
-              setUsers={setUser}
+              setUser={setUser}
             />
             <Input
               placeholder={"AdminPassword"}
               id={"startIdTel"}
               className={cl.unputs}
-              error="Не нужно вводить , если хотите войти как гость"
+              label ={"Не нужно вводить , если хотите войти как гость"}
               // Create an administration functionality
             />
             <button className={cl.buttonAutorization}>Войти</button>

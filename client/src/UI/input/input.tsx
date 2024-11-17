@@ -9,7 +9,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setUsers?: (value: string) => void;
+  setUser?: (value: string) => void;
 }
 
 const Input: React.FC<Props> = ({
@@ -20,16 +20,15 @@ const Input: React.FC<Props> = ({
   error,
   value,
   onChange,
-  setUsers,
+  setUser,
   ...attrs
 }) => {
   const classes = classNames(cl.input, className);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (setUsers) setUsers(e.target.value);
+    if (setUser) setUser(e.target.value);
     if (onChange) onChange(e);
   };
-
   return (
     <div className={cl.inputWrapper}>
       {label && (
@@ -47,7 +46,7 @@ const Input: React.FC<Props> = ({
         onChange={handleChange}
         {...attrs}
       />
-      {error && <span className={cl.inputError}>{error}</span>}
+      {error && <span className={cl.inputError}>{"Введите имя чтобы войти!"}</span>}
     </div>
   );
 };

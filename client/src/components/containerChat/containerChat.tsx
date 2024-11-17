@@ -42,7 +42,7 @@ const Chat: React.FC<ChatPropsType> = ({
 
   return (
     <div className={cl.rightContainer}>
-      
+
       <div className={cl.descriptionContainer}>
         <span>
           {descriptionInterlocutor}
@@ -61,7 +61,7 @@ const Chat: React.FC<ChatPropsType> = ({
           <Input
             id={"message"}
             value={message}
-            setUsers={setMessage}
+            setUser={setMessage}
             placeholder="Введите сообщение"
             className={cl.chatConteinerUnput}
           />
